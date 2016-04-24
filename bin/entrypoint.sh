@@ -1,8 +1,8 @@
 #!/usr/local/bin/dumb-init /bin/bash
 set -e
 
-if [ -S /shareddev/$(hostname)/log ];then
-    ln -s /shareddev/$(hostname)/log /dev/log
+if [ -z ${LOGNAME} -a -S /shareddev/${LOGNAME}/log ];then
+    ln -s /shareddev/${LOGNAME}/log /dev/log
     logger -s "Created container specific symlink to syslog container"
 elif [ -S /shareddev/log ];then
     ln -s /shareddev/log /dev/log
