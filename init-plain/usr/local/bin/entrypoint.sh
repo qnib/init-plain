@@ -13,4 +13,4 @@ for x in $(find /opt/qnib/entry/ -type f -perm +111 |sort);do
      "${x}"
 done
 
-exec "$@"
+exec su -l /bin/bash -c "$@" user
