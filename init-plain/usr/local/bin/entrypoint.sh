@@ -8,7 +8,7 @@ elif [ -S /shareddev/log ];then
     ln -s /shareddev/log /dev/log
     logger -s "Created symlink from syslog container"
 fi
-for x in $(find /opt/qnib/entry/ -s -type f -perm +111);do
+for x in $(find /opt/qnib/entry/ -type f -perm +111 |sort);do
      echo "> execute entrypoint '${x}'"
      "${x}"
 done
