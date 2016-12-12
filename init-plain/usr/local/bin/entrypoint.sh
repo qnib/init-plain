@@ -3,7 +3,11 @@ set -e
 
 for x in $(find /opt/qnib/entry/ -type f -perm +111 |sort);do
      echo "> execute entrypoint '${x}'"
-     "${x}"
+     if [[ "$x" == *.env ]];then
+         source ${x}
+     else
+         "${x}"
+     fi
 done
 
 if [ "X${ENTRY_USER}" != "X" ];then
