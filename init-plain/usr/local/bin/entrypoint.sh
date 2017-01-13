@@ -11,6 +11,7 @@ if [ "${QNIB_NO_FORK}" != "true" ];then
         exec su -s /bin/bash -c "$@" ${ENTRY_USER}
     else
         exec "$@"
+    fi
 else
     exec "$@"
 fi
