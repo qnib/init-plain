@@ -1,13 +1,16 @@
 #!/bin/bash
 set -e
 
-for x in $(find /opt/qnib/entry/ -type f -perm +111 |sort);do
-     echo "> execute entrypoint '${x}'"
-     "${x}"
-done
+if [ "${QNIB_NO_FORK}" != "true" ];then
+    for x in $(find /opt/qnib/entry/ -type f -perm +111 |sort);do
+        echo "> execute entrypoint '${x}'"
+        "${x}"
+    done
 
-if [ "X${ENTRY_USER}" != "X" ];then
-  exec su -s /bin/bash -c "$@" ${ENTRY_USER}
+    if [ "X${ENTRY_USER}" != "X" ];then
+        exec su -s /bin/bash -c "$@" ${ENTRY_USER}
+    else
+        exec "$@"
 else
-  exec "$@"
+    exec "$@"
 fi
