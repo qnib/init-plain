@@ -6,7 +6,7 @@ for x in $(find /opt/qnib/entry/ -type f -perm +111 |sort);do
      if [[ "$x" == *.env ]];then
          source ${x}
      else
-         "${x}"
+         ./${x}
      fi
 done
 
