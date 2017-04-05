@@ -12,7 +12,7 @@ done
 
 if [ "X${ENTRY_USER}" != "X" ];then
   echo "> execute CMD as user '${ENTRY_USER}'"
-  exec su -s /bin/bash -c "$@" ${ENTRY_USER}
+  exec gosu ${ENTRY_USER} /bin/bash -c "$@"
 else
   echo "> execute CMD '$@'"
   exec "$@"
