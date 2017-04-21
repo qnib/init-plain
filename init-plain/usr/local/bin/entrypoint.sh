@@ -1,4 +1,5 @@
 #!/bin/bash
+echo "[II] qnib/init-plain script v0.4.16"
 set -e
 
 if [[ -z ${SKIP_ENTRYPOINTS} ]];then
