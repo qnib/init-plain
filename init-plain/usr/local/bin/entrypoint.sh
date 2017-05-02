@@ -3,7 +3,7 @@ echo "[II] qnib/init-plain script v0.4.18"
 set -e
 
 if [[ -z ${SKIP_ENTRYPOINTS} ]];then
-    for x in $(find /opt/qnib/entry/ -type f -perm /u+x |sort);do
+    for x in $(find ${ENTRYPOINTS_DIR:-/opt/qnib/entry/} -type f -perm /u+x |sort);do
         echo "> execute entrypoint '${x}'"
         if [[ "$x" == *.env ]];then
             source ${x}
