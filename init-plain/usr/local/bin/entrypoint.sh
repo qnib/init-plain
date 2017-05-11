@@ -1,10 +1,16 @@
 #!/bin/bash
-echo "[II] qnib/init-plain script v0.4.20"
+QUIET=${QUIET_ENTRYPOINT:-false}
+function qecho() {
+  if [[ "X${QUIET}" != "Xtrue" ]];then
+    echo $@
+  fi
+}
+qecho "[II] qnib/init-plain script v0.4.20"
 set -e
 
 if [[ -z ${SKIP_ENTRYPOINTS} ]];then
     for x in $(find ${ENTRYPOINTS_DIR:-/opt/qnib/entry/} -type f -perm /u+x |sort);do
-        echo "> execute entrypoint '${x}'"
+        qecho "> execute entrypoint '${x}'"
         if [[ "$x" == *.env ]];then
             source ${x}
         else
@@ -14,9 +20,9 @@ if [[ -z ${SKIP_ENTRYPOINTS} ]];then
 fi
 
 if [ "X${ENTRY_USER}" != "X" ];then
-  echo "> execute CMD as user '${ENTRY_USER}'"
+  qecho "> execute CMD as user '${ENTRY_USER}'"
   exec gosu ${ENTRY_USER} /bin/bash -c "$@"
 else
-  echo "> execute CMD '$@'"
+  qecho "> execute CMD '$@'"
   exec "$@"
 fi
