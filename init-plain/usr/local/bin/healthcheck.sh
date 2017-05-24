@@ -1,5 +1,5 @@
 #!/bin/bash
-echo "[II] qnib/init-plain script v0.4.21"
+echo "[II] qnib/init-plain script v0.4.22"
 HEALTHCHECK_DIR=${HEALTHCHECK_DIR:-/opt/healthchecks/}
 set -e 
 
