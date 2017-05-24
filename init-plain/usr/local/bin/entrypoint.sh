@@ -1,5 +1,7 @@
 #!/bin/bash
 QUIET=${QUIET_ENTRYPOINT:-false}
+ENTRYPOINTS_DIR=${ENTRYPOINTS_DIR:-/opt/entry/}
+
 function qecho() {
   if [[ "X${QUIET}" != "Xtrue" ]];then
     echo $@
@@ -9,7 +11,7 @@ qecho "[II] qnib/init-plain script v0.4.22"
 set -e
 
 if [[ -z ${SKIP_ENTRYPOINTS} ]];then
-    for x in $(find ${ENTRYPOINTS_DIR:-/opt/qnib/entry/} -type f -perm /u+x |sort);do
+    for x in $(find ${ENTRYPOINTS_DIR} -type f -perm /u+x |sort);do
         qecho "> execute entrypoint '${x}'"
         if [[ "$x" == *.env ]];then
             source ${x}
