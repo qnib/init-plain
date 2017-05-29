@@ -35,7 +35,7 @@ if [[ -z ${SKIP_ENTRYPOINTS} ]];then
     fi
 fi
 
-if [[ "${WAIT_TASK_SLOT}" != "X" ]] && $(echo "${WAIT_TASK_SLOT}" |sed -e 's/,/ /g' | grep -q -w "${SWARM_TASK_SLOT}");then
+if [[ "X${WAIT_TASK_SLOT}" != "X" ]] && $(echo "${WAIT_TASK_SLOT}" |sed -e 's/,/ /g' | grep -q -w "${SWARM_TASK_SLOT}");then
   qecho "> Slot ${SWARM_TASK_SLOT} in '${WAIT_TASK_SLOT}', so we wait.sh"
   exec wait.sh
 fi
