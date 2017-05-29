@@ -12,9 +12,9 @@ if [[ "X${ALLOW_HEALTHCHECK_OVERWRITE}" == "Xtrue" ]] && [[ -f ${HEALTHCHECK_DIR
     echo ">> INITIALIZATION PHASE! Until HC successed the first time, it will be overwritten to be OK."
     set +e
 fi
-while read -r line;do
-    echo "> execute healthcheck '${x}'"
-    ${x}
+while read -r LINE;do
+    echo "> execute healthcheck '${LINE}'"
+    ${LINE}
     EC=$?
     if [[ ${EC} -ne 0 ]];then
         echo ">> Healthcheck failed, but as '${HEALTHCHECK_DIR}/force_true' is set it will be ignored"
