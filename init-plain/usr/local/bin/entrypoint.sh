@@ -11,24 +11,24 @@ set -e
 
 if [[ -z ${SKIP_ENTRYPOINTS} ]];then
     ## /opt/entry/
-    for x in $(find /opt/entry/ -type f -perm /u+x |sort);do
+    while read -r x;do
         qecho "> execute entrypoint '${x}'"
         if [[ "$x" == *.env ]];then
             source ${x}
         else
             ${x}
         fi
-    done
+    done <<< $(find /opt/entry/ -type f -perm /u+x |sort)
     if [[ "X${ENTRYPOINTS_DIR}" != "X" ]];then
       if [[ -d ${ENTRYPOINTS_DIR} ]];then
-        for x in $(find ${ENTRYPOINTS_DIR} -type f -perm /u+x |sort);do
+        while read -r x;do
           qecho "> execute entrypoint '${x}'"
           if [[ "$x" == *.env ]];then
               source ${x}
           else
               ${x}
           fi
-        done
+        done <<< $(find ${ENTRYPOINTS_DIR} -type f -perm /u+x |sort)
       else
         echo "!!> Could not find specified ENTRYPOINTS_DIR '${ENTRYPOINTS_DIR}'"
       fi
