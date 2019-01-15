@@ -9,5 +9,7 @@ function fix_linux_internal_host() {
     echo 'Added $DOCKER_INTERNAL_HOST to hosts /etc/hosts'
   fi
 }
-
+if [[ $(id -u) -ne 0 ]];then
+  exit 0
+fi
 fix_linux_internal_host
