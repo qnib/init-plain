@@ -1,5 +1,6 @@
 #!/bin/bash
 QUIET=${QUIET_ENTRYPOINT:-false}
+ENTRY_CMD=${ENTRY_CMD:-bash}
 
 function qecho() {
   if [[ "X${QUIET}" != "Xtrue" ]];then
@@ -40,7 +41,7 @@ if [[ "X${WAIT_TASK_SLOT}" != "X" ]] && $(echo "${WAIT_TASK_SLOT}" |sed -e 's/,/
 fi
 if [ "X${ENTRY_USER}" != "X" ];then
   qecho "> execute CMD as user '${ENTRY_USER}'"
-  exec gosu ${ENTRY_USER} /bin/bash -c "$@"
+  exec gosu ${ENTRY_USER} ${ENTRY_CMD} -c "$@"
 else
   qecho "> execute CMD '$@'"
   exec "$@"
