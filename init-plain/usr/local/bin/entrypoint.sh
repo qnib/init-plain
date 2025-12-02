@@ -7,7 +7,7 @@ function qecho() {
     echo $@
   fi
 }
-qecho "[II] qnib/init-plain script v0.4.35"
+qecho "[II] qnib/init-plain script v0.5.1"
 set -e
 
 if [[ -z ${SKIP_ENTRYPOINTS} ]];then 
